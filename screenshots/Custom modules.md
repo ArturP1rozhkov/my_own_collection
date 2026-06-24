@@ -531,7 +531,7 @@ cat > args.json <<EOF
 EOF
  python3 my_own_module.py /tmp/args.json
 ```
-![Pasted image 20260624145018.png](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624145018.png)
+![Pasted image 20260624145018](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624145018.png)
 - модуль запускается как отдельный Python-скрипт и возвращает валидный JSON для Ansible;
 - модуль создаёт файл по переданному пути;
 - поле `changed: true` показывает, что модуль посчитал текущее выполнение изменяющим состояние системы;
@@ -561,19 +561,19 @@ cp my_own_module.py library/my_own_module.py
 Когда `library/` рядом с `playbook`, не требуется отдельного `ansible.cfg`,  установки `collection` и проверяется через  `ansible-playbook` (https://stackoverflow.com/questions/45902515/how-to-create-the-custom-module-in-the-ansible, https://stackoverflow.com/questions/53750049/location-to-keep-ansible-custom-modules&rut=f019260b9f72cadf76e64c750f138930840e5be2578da3b6ce99649660cc0481)
 
 Запустил `playbook` командой `ansible-playbook playbook.yml`
-![Pasted image 20260624154330.png](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624154330.png)
+![Pasted image 20260624154330](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624154330.png)
 `playbook` отработал, задача выполнилась на `localhost`, а `changed=1` на первом запуске обозначает, что модуль создал новый файл.
 
 6. Проверка на идемпотентность путем повторного запуска `playbook`
 ```bash
 ansible-playbook playbook.yml
 ```
-![Pasted image 20260624154714.png](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624154714.png)
+![Pasted image 20260624154714](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624154714.png)
 на втором запуске задача вернулась со статусом `ok`, а в recap `changed=0`, значит модуль распознал, что целевой файл уже находится в нужном состоянии, и повторно ничего не менял. 
 
 7. Вышел из виртуального окружения командой `deactivate`
 8. Инициировал новую `collections` командой `ansible-galaxy collection init my_own_namespace.yandex_cloud_elk`
-![Pasted image 20260624194930.png](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624194930.png)
+![Pasted image 20260624194930](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624194930.png)
 
 9. Перенес `module` в соответствующую созданную директорию:
 ```bash
@@ -584,7 +584,7 @@ cp my_own_module.py my_own_namespace/yandex_cloud_elk/plugins/modules/my_own_mod
 ```bash
 ansible-galaxy role init my_own_namespace/yandex_cloud_elk/roles/my_own_role
 ```
-   ![Pasted image 20260624200143.png](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624200143.png)
+   ![Pasted image 20260624200143.](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624200143.png)
 перенес параметры в `defaults/main.yml`, а сам вызов модуля - в `tasks/main.yml`
 `defaults/main.yml`
 ```yaml
@@ -622,9 +622,9 @@ mkdir -p my_own_namespace/yandex_cloud_elk/playbooks
 ```bash
 ansible-playbook my_own_namespace.yandex_cloud_elk.test_role
 ```
-![Pasted image 20260624202315.png](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624202315.png)
+![Pasted image 20260624202315](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624202315.png)
 повторно:
-![Pasted image 20260624202343.png](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624202343.png)
+![Pasted image 20260624202343](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624202343.png)
 12. Заполнил документацию
 файл `galaxy.yml`
 ```text
@@ -745,22 +745,22 @@ ansible-galaxy collection install my_own_namespace-yandex_cloud_elk-1.0.0.tar.gz
 mkdir -p .collections
 ansible-galaxy collection install my_own_namespace-yandex_cloud_elk-1.0.0.tar.gz -p .collections --force
 ```
-![Pasted image 20260624214848.png](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624214848.png)
+![Pasted image 20260624214848](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624214848.png)
 
 указал Ansible новый путь поиска коллекций. Для этого явно указал `ANSIBLE_COLLECTIONS_PATH` на каталог, в который установил архив.
 ```bash
 export ANSIBLE_COLLECTIONS_PATH=~/my_own_collection/collection_install_test/.collections
 ansible-galaxy collection list my_own_namespace.yandex_cloud_elk
 ```
-![Pasted image 20260624215117.png](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624215117.png)
+![Pasted image 20260624215117](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624215117.png)
 
 16. Запустил коллекцию командой два раза подряд
 ```bash
 ansible-playbook playbook.yml
 ```
-![Pasted image 20260624215603.png](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624215603.png)
+![Pasted image 20260624215603](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624215603.png)
 файл создан в целевой директории с заданным содержимым:
-![Pasted image 20260624215732.png](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624215732.png)
+![Pasted image 20260624215732](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624215732.png)
 
 
 
