@@ -1,0 +1,11 @@
+---
+- name: Test custom module
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Create test file with custom module
+      my_own_module:
+        path: ./playbook_test.txt
+        content: "hello from playbook"
