@@ -1,0 +1,4 @@
+#SPDX-License-Identifier: MIT-0
+---
+my_own_role_path: "./role_test.txt"
+my_own_role_content: "hello from role"
