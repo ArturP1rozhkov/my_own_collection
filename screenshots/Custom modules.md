@@ -754,8 +754,3 @@ ansible-playbook playbook.yml
 ![Pasted image 20260624215732](https://github.com/ArturP1rozhkov/my_own_collection/blob/main/screenshots/Pasted%20image%2020260624215732.png)
 
 
-
-> [!calendar]- Дата
-> **Добавлено:** 2026-06-22  22:48
-> **Изменено: **<%+ tp.file.last_modified_date("YYYY-MM-DD HH:mm") %>
-> **Тема лекции:** <%+ tp.file.title %>
